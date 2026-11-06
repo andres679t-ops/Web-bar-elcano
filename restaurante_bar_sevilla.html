@@ -1,0 +1,791 @@
+!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Bar Club Elcano - Sevilla</title>
+    
+    <!-- Reset para sobrescribir reglas agresivas del tema de WordPress -->
+    <style>
+        .entry-content, .post-inner, .site-content, article {
+            max-width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    </style>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            gold: '#D4AF37',
+                            goldHover: '#B89528',
+                            olive: '#2A3B28',
+                            oliveDark: '#1A2619',
+                            clay: '#9E4A2B',
+                            warmBg: '#FAF8F5',
+                            cardBg: '#FFFFFF',
+                            darkText: '#222222',
+                            muted: '#666666'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FAF8F5 !important;
+            color: #222222;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        h1, h2, h3, h4, .font-serif-title {
+            font-family: 'Cormorant Garamond', serif !important;
+        }
+        h1, h2, h3, h4, .font-serif-title {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .bg-pattern {
+            background-image: radial-gradient(#D4AF37 0.75px, transparent 0.75px);
+            background-size: 24px 24px;
+            opacity: 0.15;
+        }
+        .blur-backdrop {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A3B28;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col justify-between overflow-x-hidden">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-40 transition-all duration-300 bg-brand-olive/95 blur-backdrop text-white shadow-lg border-b border-brand-gold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full border border-brand-gold flex items-center justify-center bg-brand-oliveDark group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-mug-hot text-brand-gold text-lg"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-2xl font-bold tracking-wider text-white">CAFÉ BAR ELCANO</span>
+                    <span class="text-[10px] tracking-widest text-brand-gold uppercase -mt-1">Tercera Edad • Sevilla</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                <a href="#nosotros" class="hover:text-brand-gold transition-colors">Sobre Nosotros</a>
+                <a href="#carta" class="hover:text-brand-gold transition-colors">Desayunos & Tapas</a>
+                <a href="#experiencia" class="hover:text-brand-gold transition-colors">Recomendador</a>
+                <a href="#promos" class="hover:text-brand-gold transition-colors text-brand-gold">
+                    <i class="fa-solid fa-gift mr-1"></i> Club Elcano
+                </a>
+            </nav>
+
+            <!-- Quick Action Calls -->
+            <div class="hidden lg:flex items-center space-x-3">
+                <a href="https://wa.me/34603340825?text=Hola,%20quisiera%20consultar%20disponibilidad%20o%20hacer%20un%20encargo%20en%20Bar%20Elcano" target="_blank" class="px-4 py-2.5 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold uppercase tracking-wider flex items-center shadow-md transition-all hover:scale-105">
+                    <i class="fa-brands fa-whatsapp text-base mr-2"></i> WhatsApp Directo
+                </a>
+                <button onclick="openBookingModal()" class="px-5 py-2.5 rounded-full bg-brand-gold hover:bg-brand-goldHover text-brand-oliveDark font-semibold text-xs uppercase tracking-wider shadow-md transition-all hover:scale-105">
+                    Mesa / Encarregar
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-white focus:outline-none p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-oliveDark border-b border-brand-gold/20 px-6 py-6 space-y-4">
+            <a href="#nosotros" class="block text-white hover:text-brand-gold py-1">Sobre Nosotros</a>
+            <a href="#carta" class="block text-white hover:text-brand-gold py-1">Carta Digital</a>
+            <a href="#experiencia" class="block text-white hover:text-brand-gold py-1">Recomendador</a>
+            <a href="#promos" class="block text-brand-gold font-semibold py-1"><i class="fa-solid fa-gift mr-2"></i> Club Elcano</a>
+            <div class="pt-4 border-t border-gray-700 flex flex-col gap-3">
+                <a href="https://wa.me/34603340825?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20Bar%20Elcano" target="_blank" class="w-full text-center py-3 rounded-xl bg-emerald-700 text-white font-medium flex items-center justify-center">
+                    <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Contactar por WhatsApp
+                </a>
+                <button onclick="openBookingModal()" class="w-full py-3 rounded-xl bg-brand-gold text-brand-oliveDark font-bold uppercase tracking-wider">
+                    Reservar o Encargar
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-brand-oliveDark text-white">
+        <div class="absolute inset-0 z-0 opacity-25 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-oliveDark via-transparent to-brand-oliveDark/80 z-0"></div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-16">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-xs uppercase tracking-widest mb-6">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>C. Goleta, 3 • Barriada Elcano, Sevilla</span>
+            </div>
+            
+            <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight mb-6 leading-tight">
+                Café Bar Club Elcano<br><span class="italic font-normal text-brand-gold">El Punto de Encuentro con Sabor de Siempre</span>
+            </h1>
+
+            <p class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Desayunos con pan de pueblo, guisos caseros, cervezas bien frías y la mejor compañía en un ambiente cómodo, relajado y lleno de buena conversación.
+            </p>
+
+            <!-- Conversion Action Bar -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto">
+                <a href="#carta" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-gold hover:bg-brand-goldHover text-brand-oliveDark font-bold text-sm tracking-widest uppercase transition-all shadow-xl hover:shadow-brand-gold/20 hover:-translate-y-0.5 flex items-center justify-center">
+                    <i class="fa-solid fa-utensils mr-2"></i> Ver Carta & Tapas
+                </a>
+                <a href="https://wa.me/34603340825?text=Hola!%20Quiero%20consultar%20el%20men%C3%BA%20del%20d%C3%ADa%20o%20hacer%20un%20pedido" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-sm tracking-widest uppercase backdrop-blur-md border border-white/20 transition-all flex items-center justify-center">
+                    <i class="fa-brands fa-whatsapp text-lg mr-2 text-emerald-400"></i> Contacto por WhatsApp
+                </a>
+            </div>
+
+            <!-- Quick Info Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-8 border-t border-white/10 text-xs sm:text-sm text-gray-300">
+                <div class="flex flex-col items-center">
+                    <span class="text-brand-gold font-serif text-2xl font-bold">4.5 ★★★★★</span>
+                    <span class="text-gray-400">+250 Valoraciones Reales</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-brand-gold font-serif text-2xl font-bold">Desde 8:30 h</span>
+                    <span class="text-gray-400">Desayunos & Tapas</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-brand-gold font-serif text-2xl font-bold">603 34 08 25</span>
+                    <span class="text-gray-400">Atención WhatsApp</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-brand-gold font-serif text-2xl font-bold">C. Goleta, 3</span>
+                    <span class="text-gray-400">Sevilla (Elcano)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nosotros -->
+    <section id="nosotros" class="py-20 bg-brand-warmBg relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80" alt="Café Bar Elcano" class="w-full h-96 sm:h-[480px] object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 z-20 bg-brand-olive text-white p-6 rounded-2xl shadow-xl border border-brand-gold/30 hidden sm:block">
+                        <p class="font-serif text-3xl font-bold text-brand-gold">Barriada Elcano</p>
+                        <p class="text-xs uppercase tracking-widest text-gray-300">Tradición y Cercanía</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <span class="text-brand-clay font-bold text-xs uppercase tracking-widest">Un Rincón de Encuentro</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold text-brand-oliveDark leading-tight">
+                        Cercanía, sencillez y la calidez del hogar
+                    </h2>
+                    <p class="text-brand-muted leading-relaxed">
+                        El **Café Bar Club de la Tercera Edad Elcano** es mucho más que un bar: es un espacio familiar pensado para compartir momentos tranquilos, tertulias agradables y una gastronomía honesta hecha con cariño.
+                    </p>
+                    <p class="text-brand-muted leading-relaxed">
+                        Desde tempranas horas ofrecemos desayunos con tostadas variadas y café recién hecho, pasando por aperitivos con cerveza muy fría y tapas de guisos caseros tradicionales que gustan a jóvenes y mayores.
+                    </p>
+
+                    <div class="pt-4 flex items-center space-x-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 rounded-full bg-brand-olive/10 flex items-center justify-center text-brand-olive">
+                                <i class="fa-solid fa-mug-hot text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-brand-oliveDark">Desayunos Caseros</h4>
+                                <p class="text-xs text-brand-muted">Pan crujiente y aceite D.O.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 rounded-full bg-brand-olive/10 flex items-center justify-center text-brand-olive">
+                                <i class="fa-solid fa-heart text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-brand-oliveDark">Trato Afectivo</h4>
+                                <p class="text-xs text-brand-muted">Ambiente amigable y tranquilo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECOMENDADOR INTERACTIVO -->
+    <section id="experiencia" class="py-16 bg-brand-olive text-white relative">
+        <div class="bg-pattern absolute inset-0"></div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-brand-gold text-xs uppercase tracking-widest font-semibold">Recomendador Elcano</span>
+                <h2 class="font-serif text-4xl font-bold mt-1 text-white">¿Qué te apetece tomar hoy?</h2>
+                <p class="text-gray-300 text-sm mt-2">Dinos tu preferencia y te sugerimos el aperitivo o menú perfecto.</p>
+            </div>
+
+            <div class="bg-brand-oliveDark/90 border border-brand-gold/30 rounded-2xl p-6 sm:p-10 shadow-2xl backdrop-blur-sm">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-brand-gold mb-2 font-semibold">1. Momento del Día</label>
+                        <select id="pref-moment" class="w-full bg-brand-olive border border-gray-600 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold">
+                            <option value="desayuno">Desayuno de Mañana</option>
+                            <option value="aperitivo">Aperitivo de Mediodía</option>
+                            <option value="cena">Tarde / Cenas Tranquilas</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-brand-gold mb-2 font-semibold">2. Prefeferencia</label>
+                        <select id="pref-style" class="w-full bg-brand-olive border border-gray-600 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold">
+                            <option value="tradicional">Guisos y Chicharrones</option>
+                            <option value="ligero">Montaditos y Aliños</option>
+                            <option value="pescado">Pescaíto Frito</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-brand-gold mb-2 font-semibold">3. Bebida</label>
+                        <select id="pref-drink" class="w-full bg-brand-olive border border-gray-600 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold">
+                            <option value="cafe">Café con Leche / Infusión</option>
+                            <option value="cerveza">Cerveza helada</option>
+                            <option value="vino">Vino Tinto / Manzanilla</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="generateRecommendation()" class="px-8 py-3.5 bg-brand-gold hover:bg-brand-goldHover text-brand-oliveDark font-bold rounded-full text-xs uppercase tracking-widest shadow-lg transition-transform hover:scale-105">
+                        <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Ver Sugerencia de la Casa
+                    </button>
+                </div>
+
+                <div id="recommendation-result" class="hidden mt-8 pt-8 border-t border-gray-700">
+                    <div class="bg-brand-olive p-6 rounded-xl border border-brand-gold/40 flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="space-y-2">
+                            <span class="inline-block px-3 py-1 bg-brand-gold/20 text-brand-gold text-[10px] font-bold uppercase tracking-widest rounded-full">Combinación Recomendada</span>
+                            <h3 id="rec-title" class="font-serif text-2xl font-bold text-white">Carne en Salsa + Cerveza Helada</h3>
+                            <p id="rec-desc" class="text-sm text-gray-300">Un guiso casero con la mejor salsa de la casa y el refresco perfecto.</p>
+                        </div>
+                        <a id="rec-whatsapp-btn" href="#" target="_blank" class="shrink-0 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs tracking-wider uppercase flex items-center shadow-md">
+                            <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Consultar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARTA DIGITAL -->
+    <section id="carta" class="py-20 bg-brand-warmBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-clay font-bold text-xs uppercase tracking-widest">Platos y Especialidades</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-brand-oliveDark mt-1">Nuestra Carta Elcano</h2>
+                <p class="text-brand-muted text-sm mt-3">Comida popular sevillana hecha al momento a precios muy accesibles.</p>
+            </div>
+
+            <!-- Filtros -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10">
+                <button onclick="filterMenu('todos')" class="menu-filter-btn active px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all border border-brand-olive bg-brand-olive text-white shadow-sm">
+                    Todos
+                </button>
+                <button onclick="filterMenu('desayunos')" class="menu-filter-btn px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all border border-gray-300 bg-white text-brand-oliveDark hover:border-brand-olive">
+                    Desayunos
+                </button>
+                <button onclick="filterMenu('guisos')" class="menu-filter-btn px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all border border-gray-300 bg-white text-brand-oliveDark hover:border-brand-olive">
+                    Guisos y Tapas
+                </button>
+                <button onclick="filterMenu('montaditos')" class="menu-filter-btn px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all border border-gray-300 bg-white text-brand-oliveDark hover:border-brand-olive">
+                    Montaditos & Raciones
+                </button>
+            </div>
+
+            <!-- Grid de Platos -->
+            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="menu-item category-desayunos bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80" alt="Desayuno Andaluz" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-brand-olive/90 text-brand-gold text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest border border-brand-gold/30">Clásico</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-serif text-2xl font-bold text-brand-oliveDark">Tostada Entera con Aceite y Tomate</h3>
+                                <span class="font-serif font-bold text-xl text-brand-clay">2,80 €</span>
+                            </div>
+                            <p class="text-brand-muted text-xs leading-relaxed mb-4">Pan mollete o de pueblo crujiente, tomate natural triturado y aceite virgen extra con café incluido.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 flex items-center justify-between border-t border-gray-50 mt-auto">
+                        <span class="text-[11px] text-gray-400"><i class="fa-solid fa-mug-hot mr-1"></i> Incluye Café/Infusión</span>
+                        <button onclick="quickOrder('Tostada Aceite y Tomate + Café')" class="text-xs font-bold text-brand-olive hover:text-brand-clay uppercase tracking-wider flex items-center">
+                            Añadir <i class="fa-solid fa-plus-circle ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="menu-item category-guisos bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="Carne en salsa" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-brand-clay text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Especialidad</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-serif text-2xl font-bold text-brand-oliveDark">Carne en Salsa Casera</h3>
+                                <span class="font-serif font-bold text-xl text-brand-clay">3,50 € / tapa</span>
+                            </div>
+                            <p class="text-brand-muted text-xs leading-relaxed mb-4">Magro de cerdo tierno guisado a fuego lento con sofrito tradicional y patatas fritas de la casa.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 flex items-center justify-between border-t border-gray-50 mt-auto">
+                        <span class="text-[11px] text-gray-400"><i class="fa-solid fa-fire mr-1"></i> Receta Casera</span>
+                        <button onclick="quickOrder('Carne en Salsa Casera')" class="text-xs font-bold text-brand-olive hover:text-brand-clay uppercase tracking-wider flex items-center">
+                            Añadir <i class="fa-solid fa-plus-circle ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="menu-item category-guisos bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80" alt="Croquetas" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-serif text-2xl font-bold text-brand-oliveDark">Croquetas de Puchero</h3>
+                                <span class="font-serif font-bold text-xl text-brand-clay">3,20 € / tapa</span>
+                            </div>
+                            <p class="text-brand-muted text-xs leading-relaxed mb-4">Cremosas y crujientes, hechas con el auténtico pringá del puchero sevillano.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 flex items-center justify-between border-t border-gray-50 mt-auto">
+                        <span class="text-[11px] text-gray-400"><i class="fa-solid fa-utensils mr-1"></i> 100% Artesanas</span>
+                        <button onclick="quickOrder('Croquetas de Puchero')" class="text-xs font-bold text-brand-olive hover:text-brand-clay uppercase tracking-wider flex items-center">
+                            Añadir <i class="fa-solid fa-plus-circle ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="menu-item category-montaditos bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=600&q=80" alt="Montaditos" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-serif text-2xl font-bold text-brand-oliveDark">Montadito de Pringá</h3>
+                                <span class="font-serif font-bold text-xl text-brand-clay">2,50 €</span>
+                            </div>
+                            <p class="text-brand-muted text-xs leading-relaxed mb-4">Pan crujiente servido bien caliente con pringá del día recién desmenuzada.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 flex items-center justify-between border-t border-gray-50 mt-auto">
+                        <span class="text-[11px] text-gray-400"><i class="fa-solid fa-bread-slice mr-1"></i> Favorito del Barrio</span>
+                        <button onclick="quickOrder('Montadito de Pringá')" class="text-xs font-bold text-brand-olive hover:text-brand-clay uppercase tracking-wider flex items-center">
+                            Añadir <i class="fa-solid fa-plus-circle ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="menu-item category-montaditos bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80" alt="Pescaíto" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-serif text-2xl font-bold text-brand-oliveDark">Ración de Choco Frito</h3>
+                                <span class="font-serif font-bold text-xl text-brand-clay">8,50 €</span>
+                            </div>
+                            <p class="text-brand-muted text-xs leading-relaxed mb-4">Choco tierno frito a la andaluza, crujiente en su punto justo.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 flex items-center justify-between border-t border-gray-50 mt-auto">
+                        <span class="text-[11px] text-gray-400"><i class="fa-solid fa-fish mr-1"></i> Ración Generosa</span>
+                        <button onclick="quickOrder('Ración de Choco Frito')" class="text-xs font-bold text-brand-olive hover:text-brand-clay uppercase tracking-wider flex items-center">
+                            Añadir <i class="fa-solid fa-plus-circle ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="menu-item category-montaditos bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80" alt="Bebidas" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-serif text-2xl font-bold text-brand-oliveDark">Cerveza de Tirador Helada</h3>
+                                <span class="font-serif font-bold text-xl text-brand-clay">1,60 €</span>
+                            </div>
+                            <p class="text-brand-muted text-xs leading-relaxed mb-4">Caña helada de tirador servida a la temperatura ideal para disfrutar en la barra o terraza.</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 flex items-center justify-between border-t border-gray-50 mt-auto">
+                        <span class="text-[11px] text-gray-400"><i class="fa-solid fa-beer-mug-empty mr-1"></i> Siempre Fría</span>
+                        <button onclick="quickOrder('Caña de Cerveza')" class="text-xs font-bold text-brand-olive hover:text-brand-clay uppercase tracking-wider flex items-center">
+                            Añadir <i class="fa-solid fa-plus-circle ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen de Pedido Flotante -->
+            <div id="cart-summary" class="hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 z-40 bg-brand-oliveDark text-white px-6 py-4 rounded-full shadow-2xl border border-brand-gold flex items-center space-x-6">
+                <div>
+                    <span id="cart-count" class="bg-brand-gold text-brand-oliveDark font-bold text-xs px-2.5 py-1 rounded-full">0</span>
+                    <span class="text-xs uppercase tracking-wider font-medium ml-2">Seleccionados</span>
+                </div>
+                <button onclick="sendCartToWhatsApp()" class="px-5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider flex items-center transition-all">
+                    <i class="fa-brands fa-whatsapp text-base mr-2"></i> Pedir / Consultar por WhatsApp
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLUB ELCANO - BENEFICIOS -->
+    <section id="promos" class="py-16 bg-brand-oliveDark text-white relative">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <span class="text-brand-gold text-xs uppercase tracking-widest font-semibold">Detalle de Bienvenida</span>
+            <h2 class="font-serif text-4xl font-bold mt-1">Socio y Amigo de Bar Elcano</h2>
+            <p class="text-gray-300 text-sm mt-2 max-w-xl mx-auto">Queremos tener un detalle contigo en tu próxima visita al bar.</p>
+
+            <div id="scratch-card-box" class="mt-8 bg-brand-olive p-8 rounded-2xl border border-brand-gold/30 max-w-md mx-auto shadow-2xl">
+                <div id="scratch-before">
+                    <i class="fa-solid fa-gift text-4xl text-brand-gold mb-3"></i>
+                    <h3 class="font-serif text-2xl font-bold text-white mb-2">Desbloquea tu Invitación</h3>
+                    <p class="text-xs text-gray-300 mb-6">Toca el botón para descubrir tu regalo de la casa para tu próxima visita.</p>
+                    <button onclick="revealGift()" class="px-6 py-3 rounded-full bg-brand-gold text-brand-oliveDark font-bold text-xs uppercase tracking-widest hover:bg-brand-goldHover transition-all shadow-md">
+                        <i class="fa-solid fa-sparkles mr-2"></i> Activar Beneficio
+                    </button>
+                </div>
+
+                <div id="scratch-after" class="hidden space-y-4">
+                    <div class="w-16 h-16 rounded-full bg-brand-gold/20 border border-brand-gold text-brand-gold flex items-center justify-center mx-auto text-2xl">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-brand-gold">¡Enhorabuena!</h3>
+                    <p class="text-sm text-gray-200">Tienes un <span class="font-bold text-white">Café o Aperitivo de Bienvenida Gratis</span> con tu consumición.</p>
+                    <p class="text-[11px] text-gray-400">Código promocional: <span class="font-mono text-brand-gold">CLUB-ELCANO-2026</span></p>
+                    
+                    <a id="claim-gift-btn" href="https://wa.me/34603340825?text=Hola!%20He%20desbloqueado%20el%20c%C3%B3digo%20CLUB-ELCANO-2026%20para%20mi%20pr%C3%B3xima%20visita" target="_blank" class="inline-block w-full py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider transition-all">
+                        <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Presentar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UBICACIÓN & HORARIOS REAELMNETE SOBRIOS -->
+    <section class="py-20 bg-brand-warmBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="space-y-6">
+                    <span class="text-brand-clay font-bold text-xs uppercase tracking-widest">Dónde Estamos</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold text-brand-oliveDark">
+                        Ven a visitarnos en la Barriada Elcano
+                    </h2>
+                    <p class="text-brand-muted text-sm leading-relaxed">
+                        Fácil acceso, ambiente vecinal acogedor y terraza agradable en un rincón emblemático de Sevilla.
+                    </p>
+
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-olive text-brand-gold flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-oliveDark text-sm">Dirección</h4>
+                                <p class="text-xs text-brand-muted">C. Goleta, 3, 41012 Sevilla (Junto a Los Bermejales)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-olive text-brand-gold flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-oliveDark text-sm">Horario de Apertura</h4>
+                                <p class="text-xs text-brand-muted">Lunes a Sábado: 8:30 h - 23:00 h<br>Domingo: 9:00 h - 16:30 h</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-olive text-brand-gold flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-oliveDark text-sm">Contacto & WhatsApp Directo</h4>
+                                <p class="text-xs text-brand-muted">+34 603 34 08 25</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 flex flex-wrap gap-4">
+                        <a href="https://www.google.com/maps/place//data=!4m2!3m1!19sChIJh5EFLnhuEg0RHlbl_dTjTpc" target="_blank" class="px-6 py-3 rounded-full bg-brand-olive text-white font-semibold text-xs uppercase tracking-wider flex items-center hover:bg-brand-oliveDark transition-colors">
+                            <i class="fa-solid fa-map-location-dot mr-2"></i> Abrir en Google Maps
+                        </a>
+                        <a href="tel:+34603340825" class="px-6 py-3 rounded-full border border-brand-olive text-brand-olive font-semibold text-xs uppercase tracking-wider flex items-center hover:bg-brand-olive hover:text-white transition-colors">
+                            <i class="fa-solid fa-phone mr-2"></i> Llamar al Bar
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mapa interactivo real de C. Goleta 3 -->
+                <div class="rounded-2xl overflow-hidden shadow-xl border-2 border-white h-96 relative bg-gray-200">
+                    <iframe 
+                        title="Ubicacion Bar Elcano Sevilla"
+                        src="https://maps.google.com/maps?q=Calle%20Goleta%203%20Sevilla&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                        class="w-full h-full border-0" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-oliveDark text-gray-400 py-12 border-t border-brand-gold/20 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-mug-hot text-brand-gold text-lg"></i>
+                <span class="font-serif text-xl font-bold text-white tracking-wider">CAFÉ BAR CLUB ELCANO</span>
+            </div>
+
+            <p class="text-center md:text-left">
+                © 2026 Café Bar Club de la Tercera Edad Elcano (Sevilla). C. Goleta, 3.
+            </p>
+
+            <div class="flex space-x-4 text-base text-gray-300">
+                <a href="https://wa.me/34603340825" target="_blank" class="hover:text-brand-gold transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="tel:+34603340825" class="hover:text-brand-gold transition-colors"><i class="fa-solid fa-phone"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WIDGET FLOTANTE WHATSAPP -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        <a href="https://wa.me/34603340825?text=Hola!%20Contactaba%20desde%20la%20web%20de%20Bar%20Elcano" target="_blank" class="w-14 h-14 rounded-full bg-emerald-600 text-white flex items-center justify-center text-2xl shadow-2xl hover:bg-emerald-700 hover:scale-110 transition-all border-2 border-white group relative">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="absolute right-16 top-2 bg-brand-oliveDark text-white text-[11px] font-medium px-3 py-1 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-md pointer-events-none">
+                ¿Escribir por WhatsApp?
+            </span>
+        </a>
+    </div>
+
+    <!-- MODAL RESERVAS / ENCARGOS -->
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden bg-black/70 blur-backdrop flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative border border-brand-gold/30">
+            <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <h3 class="font-serif text-3xl font-bold text-brand-oliveDark mb-1">Encargo o Reserva de Mesa</h3>
+            <p class="text-xs text-brand-muted mb-6">Escríbenos directamente y te atenderemos enseguida.</p>
+
+            <form id="modal-form" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-brand-oliveDark uppercase mb-1">Tu Nombre</label>
+                    <input type="text" required id="book-name" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-brand-olive" placeholder="Ej: Manuel Pérez">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-brand-oliveDark uppercase mb-1">Tipo de Solicitud</label>
+                        <select id="book-type" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-brand-olive">
+                            <option value="Reserva de Mesa">Reserva de Mesa</option>
+                            <option value="Pedido para Llevar">Pedido para Llevar</option>
+                            <option value="Consulta Menú del Día">Consulta Menú del Día</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-brand-oliveDark uppercase mb-1">Personas / Raciones</label>
+                        <input type="number" min="1" max="20" value="2" id="book-people" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-brand-olive">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-brand-oliveDark uppercase mb-1">Fecha</label>
+                        <input type="date" required id="book-date" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-brand-olive">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-brand-oliveDark uppercase mb-1">Hora Aprox.</label>
+                        <input type="time" required id="book-time" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-brand-olive">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-brand-oliveDark uppercase mb-1">Detalles o Pedido</label>
+                    <textarea id="book-notes" rows="2" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:border-brand-olive" placeholder="Ej: Tostadas, guisos, mesa exterior..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 rounded-full bg-brand-gold hover:bg-brand-goldHover text-brand-oliveDark font-bold text-xs uppercase tracking-widest shadow-lg transition-transform hover:scale-[1.02] flex items-center justify-center">
+                    <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Enviar por WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function filterMenu(category) {
+            const buttons = document.querySelectorAll('.menu-filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-olive', 'text-white', 'active');
+                btn.classList.add('bg-white', 'text-brand-oliveDark');
+            });
+
+            event.target.classList.remove('bg-white', 'text-brand-oliveDark');
+            event.target.classList.add('bg-brand-olive', 'text-white', 'active');
+
+            const items = document.querySelectorAll('.menu-item');
+            items.forEach(item => {
+                if (category === 'todos' || item.classList.contains(`category-${category}`)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        let selectedItems = [];
+
+        function quickOrder(itemName) {
+            selectedItems.push(itemName);
+            updateCartSummary();
+        }
+
+        function updateCartSummary() {
+            const summary = document.getElementById('cart-summary');
+            const count = document.getElementById('cart-count');
+            
+            if (selectedItems.length > 0) {
+                summary.classList.remove('hidden');
+                count.innerText = selectedItems.length;
+            } else {
+                summary.classList.add('hidden');
+            }
+        }
+
+        function sendCartToWhatsApp() {
+            const itemsText = selectedItems.join(', ');
+            const message = encodeURIComponent(`Hola! Quisiera encargar o preguntar por estos platos en Bar Elcano: ${itemsText}`);
+            window.open(`https://wa.me/34603340825?text=${message}`, '_blank');
+        }
+
+        function generateRecommendation() {
+            const moment = document.getElementById('pref-moment').value;
+            const style = document.getElementById('pref-style').value;
+            const drink = document.getElementById('pref-drink').value;
+
+            const recTitle = document.getElementById('rec-title');
+            const recDesc = document.getElementById('rec-desc');
+            const recBtn = document.getElementById('rec-whatsapp-btn');
+            const resultBox = document.getElementById('recommendation-result');
+
+            let title = "Carne en Salsa Casera + Cerveza Fría";
+            let desc = "Nuestra especialidad en guisos caseros servido con el acompañamiento ideal.";
+
+            if (moment === 'desayuno') {
+                title = "Tostada de Aceite y Tomate + Café recién elaborado";
+                desc = "El auténtico desayuno sevillano para empezar bien el día.";
+            } else if (style === 'pescado') {
+                title = "Ración de Choco Frito + Manzanilla o Caña";
+                desc = "Fritura crujiente al punto de sal.";
+            } else if (style === 'ligero') {
+                title = "Montadito de Pringá Casera + Caña Fría";
+                desc = "Un bocado caliente con el mejor sabor tradicional.";
+            }
+
+            recTitle.innerText = title;
+            recDesc.innerText = desc;
+            
+            const waMessage = encodeURIComponent(`Hola! Me gustaría preguntar disponibilidad para tomar: ${title}`);
+            recBtn.href = `https://wa.me/34603340825?text=${waMessage}`;
+
+            resultBox.classList.remove('hidden');
+            resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function revealGift() {
+            document.getElementById('scratch-before').classList.add('hidden');
+            document.getElementById('scratch-after').classList.remove('hidden');
+        }
+
+        function openBookingModal() {
+            document.getElementById('booking-modal').classList.remove('hidden');
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('book-date').value = tomorrow.toISOString().split('T')[0];
+            document.getElementById('book-time').value = "13:30";
+        }
+
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.hidden = true;
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+
+        function handleBookingSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('book-name').value;
+            const type = document.getElementById('book-type').value;
+            const people = document.getElementById('book-people').value;
+            const date = document.getElementById('book-date').value;
+            const time = document.getElementById('book-time').value;
+            const notes = document.getElementById('book-notes').value;
+
+            const text = `Hola! Solicito *${type}* en Bar Elcano:%0A- *Nombre:* ${name}%0A- *Personas/Raciones:* ${people}%0A- *Fecha y Hora:* ${date} a las ${time}h%0A- *Notas:* ${notes || 'Sin especificaciones'}`;
+            
+            window.open(`https://wa.me/34603340825?text=${text}`, '_blank');
+            closeBookingModal();
+        }
+    </script>
+</body>
+</html>
